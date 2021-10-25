@@ -18,11 +18,9 @@ namespace CookBook.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT up.Id, Up.FirebaseUserId, up.FirstName, up.LastName, up.DisplayName, 
-                               up.Email, up.CreateDateTime, up.ImageLocation, up.UserTypeId,
-                               ut.Name AS UserTypeName
+                        SELECT up.Id, Up.FirebaseUserId, up.Name, up.CreateDateTime
                           FROM UserProfile up
-                               LEFT JOIN UserType ut on up.UserTypeId = ut.Id
+                 
                          WHERE FirebaseUserId = @FirebaseuserId";
 
                     DbUtils.AddParameter(cmd, "@FirebaseUserId", firebaseUserId);
@@ -36,12 +34,9 @@ namespace CookBook.Repositories
                         {
                             Id = DbUtils.GetInt(reader, "Id"),
                             FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
-                            FirstName = DbUtils.GetString(reader, "FirstName"),
-                            LastName = DbUtils.GetString(reader, "LastName"),
-                            DisplayName = DbUtils.GetString(reader, "DisplayName"),
+                            Name = DbUtils.GetString(reader, "Name"),
                             Email = DbUtils.GetString(reader, "Email"),
                             CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime"),
-                            ImageLocation = DbUtils.GetString(reader, "ImageLocation"),
                         };
                     }
                     reader.Close();
@@ -58,20 +53,15 @@ namespace CookBook.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO UserProfile (FirebaseUserId, FirstName, LastName, DisplayName, 
-                                                                 Email, CreateDateTime, ImageLocation, UserTypeId)
+                    cmd.CommandText = @"INSERT INTO UserProfile (FirebaseUserId, Name, 
+                                                                 Email, CreateDateTime)
                                         OUTPUT INSERTED.ID
-                                        VALUES (@FirebaseUserId, @FirstName, @LastName, @DisplayName, 
-                                                @Email, @CreateDateTime, @ImageLocation, @UserTypeId)";
+                                        VALUES (@FirebaseUserId, @Name, 
+                                                @Email, @CreateDateTime";
                     DbUtils.AddParameter(cmd, "@FirebaseUserId", userProfile.FirebaseUserId);
-                    DbUtils.AddParameter(cmd, "@FirstName", userProfile.FirstName);
-                    DbUtils.AddParameter(cmd, "@LastName", userProfile.LastName);
-                    DbUtils.AddParameter(cmd, "@DisplayName", userProfile.DisplayName);
+                    DbUtils.AddParameter(cmd, "@Name", userProfile.Name);
                     DbUtils.AddParameter(cmd, "@Email", userProfile.Email);
                     DbUtils.AddParameter(cmd, "@CreateDateTime", userProfile.CreateDateTime);
-                    DbUtils.AddParameter(cmd, "@ImageLocation", userProfile.ImageLocation);
-                    DbUtils.AddParameter(cmd, "@UserTypeId", userProfile.UserTypeId);
-
                     userProfile.Id = (int)cmd.ExecuteScalar();
                 }
             }
@@ -87,11 +77,10 @@ namespace CookBook.Repositories
                 using (SqlCommand cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                                SELECT u.id, u.FirebaseUserId, u.FirstName, u.LastName, u.DisplayName, u.Email,
-                                    u.CreateDateTime, u.ImageLocation, u.UserTypeId,
+                                SELECT u.id, u.FirebaseUserId, u.Name, u.Email,
+                                    u.CreateDateTime
                                     ut.[Name] AS UserTypeName
-                                FROM UserProfile u
-                                LEFT JOIN UserType ut ON u.UserTypeId = ut.id
+                                FROM UserProfile
                                 ORDER BY DisplayName
                                 ";
                     using (SqlDataReader reader = cmd.ExecuteReader())
@@ -102,12 +91,9 @@ namespace CookBook.Repositories
                             {
                                 Id = DbUtils.GetInt(reader, "Id"),
                                 FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
-                                FirstName = DbUtils.GetString(reader, "FirstName"),
-                                LastName = DbUtils.GetString(reader, "LastName"),
-                                DisplayName = DbUtils.GetString(reader, "DisplayName"),
+                                Name = DbUtils.GetString(reader, "Name"),
                                 Email = DbUtils.GetString(reader, "Email"),
-                                CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime"),
-                                ImageLocation = DbUtils.GetString(reader, "ImageLocation"),
+                                CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime")
                             };
                             users.Add(userProfile);
                         }
