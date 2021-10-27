@@ -18,10 +18,9 @@ namespace CookBook.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT up.Id, Up.FirebaseUserId, up.Name, up.CreateDateTime
-                          FROM UserProfile up
-                 
-                         WHERE FirebaseUserId = @FirebaseuserId";
+                       SELECT Id, [Name], email, CreateDateTime, firebaseUserId
+                            FROM UserProfile
+                            WHERE firebaseUserId = @FirebaseUserId";
 
                     DbUtils.AddParameter(cmd, "@FirebaseUserId", firebaseUserId);
 
@@ -33,9 +32,9 @@ namespace CookBook.Repositories
                         userProfile = new UserProfile()
                         {
                             Id = DbUtils.GetInt(reader, "Id"),
-                            FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
+                            FirebaseUserId = DbUtils.GetString(reader, "firebaseUserId"),
                             Name = DbUtils.GetString(reader, "Name"),
-                            Email = DbUtils.GetString(reader, "Email"),
+                            Email = DbUtils.GetString(reader, "email"),
                             CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime"),
                         };
                     }
@@ -57,11 +56,12 @@ namespace CookBook.Repositories
                                                                  Email, CreateDateTime)
                                         OUTPUT INSERTED.ID
                                         VALUES (@FirebaseUserId, @Name, 
-                                                @Email, @CreateDateTime";
+                                                @Email, @CreateDateTime)";
                     DbUtils.AddParameter(cmd, "@FirebaseUserId", userProfile.FirebaseUserId);
                     DbUtils.AddParameter(cmd, "@Name", userProfile.Name);
                     DbUtils.AddParameter(cmd, "@Email", userProfile.Email);
                     DbUtils.AddParameter(cmd, "@CreateDateTime", userProfile.CreateDateTime);
+
                     userProfile.Id = (int)cmd.ExecuteScalar();
                 }
             }
@@ -90,9 +90,9 @@ namespace CookBook.Repositories
                             UserProfile userProfile = new UserProfile
                             {
                                 Id = DbUtils.GetInt(reader, "Id"),
-                                FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
+                                FirebaseUserId = DbUtils.GetString(reader, "firebaseUserId"),
                                 Name = DbUtils.GetString(reader, "Name"),
-                                Email = DbUtils.GetString(reader, "Email"),
+                                Email = DbUtils.GetString(reader, "email"),
                                 CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime")
                             };
                             users.Add(userProfile);
