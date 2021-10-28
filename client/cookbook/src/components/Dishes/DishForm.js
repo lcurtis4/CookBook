@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
-import { Label } from "reactstrap";
-
+import { Button, Form, FormGroup, Label, Input } from "reactstrap";
+import { getDishById, addDish } from "../../managers/dishManager";
 
 export default function DishForm() {
     const history = useHistory();
@@ -11,14 +11,14 @@ export default function DishForm() {
 
     useEffect(() => {
         if (params.id) {
-            getDishById(parmas.id).then(p => {
+            getDishById(params.id).then(p => {
                 setDish(p)
                 setIsLoading(false)
             })
         }
     }, [])
 
-    const handleInputChang = e => {
+    const handleInputChange = e => {
         const dishCopy = { ...dish }
         dishCopy[e.target.id] = e.target.value
         setDish(dishCopy)
@@ -28,7 +28,6 @@ export default function DishForm() {
         e.preventDefault()
         if (params.id) {
             setIsLoading(true)
-            updateDish(dish)
             .then(()=>{
                 history.push("/dish")
             })
@@ -50,12 +49,12 @@ export default function DishForm() {
                     id="title"
                     placeholder="title"
                     value={dish.title}
-                    onChange={handleInputChang}
+                    onChange={handleInputChange}
                 />
                 <Label for="imageLocation">Header Image</Label>
-                <Input type="text" name="imageLocation" id="imageLocation" placeholder="Image URL" value={post.imageLocation} onChange={handleInputChange} />
+                <Input type="text" name="imageLocation" id="imageLocation" placeholder="Image URL" value={dish.imageLocation} onChange={handleInputChange} />
                 <Label for="publishDateTime">Publication Date</Label>
-                <Input type="date" name="publishDateTime" id="publishDateTime" placeholder="Publication Date" valid={post.publishDateTime} onChange={handleInputChange} />
+                <Input type="date" name="publishDateTime" id="publishDateTime" placeholder="Publication Date" valid={dish.publishDateTime} onChange={handleInputChange} />
             </FormGroup>
             <Button className="btn btn-primary" onClick={handleSave}>
                 Submit
