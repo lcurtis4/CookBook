@@ -4,6 +4,7 @@ import DishDetail from "./Dishes/DishDetail"
 import DishList from "./Dishes/DishList"
 import Login from "./Login"
 import Register from "./Register"
+import DishForm from "./Dishes/DishForm"
 
 export default function ApplicationViews({ isLoggedIn }) {
     return (
@@ -17,6 +18,10 @@ export default function ApplicationViews({ isLoggedIn }) {
                     <Register />
                 </Route>
 
+                <Route path="/addDish" exact>
+                    <DishForm />
+                </Route>
+                
                 <Route path="/dish" exact>
                     <DishList /> 
                 </Route>

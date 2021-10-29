@@ -12,7 +12,7 @@ namespace CookBook.Models
 
         [Required]
         public string Title { get; set; }
-        public string ImageLocation { get; set; }
+        public string Image { get; set; }
         
         [Required]
         public DateTime CreateDateTime { get; set; }
