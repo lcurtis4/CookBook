@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
-import { getDishById, addDish } from "../../managers/dishManager";
+import { getDishById, addDish } from "../../Managers/dishManager";
 
 export default function DishForm() {
     const history = useHistory();
