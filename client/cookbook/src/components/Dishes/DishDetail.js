@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useParams } from "react-router";
 import { ListGroup, ListGroupItem } from "reactstrap";
 import { useState } from "react/cjs/react.development";
-import { getDishById } from "../../managers/dishManager";
+import { getDishById } from "../../Managers/dishManager";
 
 export default function DishDetail () {
     const [dish, setDish] = useState({});
