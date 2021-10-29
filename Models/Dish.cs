@@ -20,5 +20,7 @@ namespace CookBook.Models
 
         [Required]
         public int UserProfileId { get; set; }
+        
+        public UserProfile UserProfile { get; set; }
     }
 }
