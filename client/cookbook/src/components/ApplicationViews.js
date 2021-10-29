@@ -1,5 +1,7 @@
 import React from "react"
 import { Switch, Route, Redirect } from "react-router-dom"
+import DishDetail from "./Dishes/DishDetail"
+import DishList from "./Dishes/DishList"
 import Login from "./Login"
 import Register from "./Register"
 
@@ -13,6 +15,14 @@ export default function ApplicationViews({ isLoggedIn }) {
 
                 <Route path="/register">
                     <Register />
+                </Route>
+
+                <Route path="/dish" exact>
+                    <DishList /> 
+                </Route>
+
+                <Route path="/dish/:id" exact>
+                    <DishDetail />
                 </Route>
             </Switch>
         </main>

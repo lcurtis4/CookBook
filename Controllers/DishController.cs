@@ -24,6 +24,23 @@ namespace CookBook.Controllers
             _userProfileRepository = userProfileRepository;
         }
 
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok(_dishRepository.GetAll());
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            var dish = _dishRepository.GetByDishId(id);
+            if (dish == null)
+            {
+                return NotFound();
+            }
+            return Ok(dish);
+        }
+
         [HttpPost]
         public IActionResult Add(Dish dish)
         {
