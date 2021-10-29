@@ -52,7 +52,8 @@ namespace CookBook.Repositories
                 {
                     cmd.CommandText = @"SELECT d.Id, d.Title, d.CreateDateTime, d.UserProfileId, u.[Name]
                                    FROM Dish d
-                                         LEFT JOIN UserProfile u ON d.UserProfileId = u.id";
+                                         LEFT JOIN UserProfile u ON d.UserProfileId = u.id
+                                    WHERE d.Id = @id";
 
                     DbUtils.AddParameter(cmd, "@Id", id);
                     var reader = cmd.ExecuteReader();
