@@ -47,6 +47,7 @@ namespace CookBook.Controllers
             var currentUser = GetCurrentUserProfileId();
 
             dish.UserProfileId = currentUser.Id;
+            //dish.CategoryId = 1;
             _dishRepository.Add(dish);
             return CreatedAtAction("Get", new { id = dish.Id }, dish);
 

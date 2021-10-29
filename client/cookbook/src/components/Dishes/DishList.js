@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useHistory } from "react-router";
 import { useState } from "react/cjs/react.development";
-import { getAllDishes } from "../../Managers/dishManager";
+import { getAllDishes } from "../../managers/dishManager";
 import Dish from "./Dish"
 
 export default function DishList() {

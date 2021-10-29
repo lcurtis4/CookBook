@@ -86,13 +86,13 @@ namespace CookBook.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO Dish (Title, ImageLocation, CreateDateTime, CategoryId, UserProfileId)
-                                        OUTPUT INSERTD.ID
-                                        VALUES (@Title, @ImageLocation, @CreateDateTime, @CategoryId, @UserProfileId";
+                    cmd.CommandText = @"INSERT INTO Dish (Title, Image, UserProfileId, CategoryId, CreateDateTime)
+                                        OUTPUT INSERTED.ID
+                                        VALUES (@Title, @Image, @UserProfileId, 1, SYSDATETIME())";
                     DbUtils.AddParameter(cmd, "@Title", dish.Title);
-                    DbUtils.AddParameter(cmd, "@ImageLocation", dish.ImageLocation);
-                    DbUtils.AddParameter(cmd, "@CreateDateTime", dish.CreateDateTime);
+                    DbUtils.AddParameter(cmd, "@Image", dish.Image);
                     DbUtils.AddParameter(cmd, "@UserProfileId", dish.UserProfileId);
+                    DbUtils.AddParameter(cmd, "@CategoryId", dish.CategoryId);
 
                     dish.Id = (int)cmd.ExecuteScalar();
                 }
