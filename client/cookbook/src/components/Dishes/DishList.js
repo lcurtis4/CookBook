@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useHistory } from "react-router";
 import { useState } from "react/cjs/react.development";
-import { getAllDishes } from "../../Managers/dishManager";
+import { deleteDish, getAllDishes } from "../Managers/dishManager";
 import Dish from "./Dish"
 
 export default function DishList() {
@@ -15,6 +15,18 @@ export default function DishList() {
         })
     }
 
+    const handleDelete = (dishId) => {
+        if (
+            window.confirm(
+                `Are you sure you want to delete? Press OK to confirm.`
+            )
+        ) {
+            deleteDish(dishId).then(getDishFromState())
+        } else {
+            history.push("/")
+        }
+    }
+
     useEffect(() => {
         getDishFromState()
     }, [])
@@ -22,7 +34,7 @@ export default function DishList() {
     return (
         <section>
             {dishes.map((d) => 
-                <Dish key={d.id} dish={d}/>
+                <Dish key={d.id} dish={d} handleDelete={handleDelete} />
                 //add delete method
             )}
         </section>

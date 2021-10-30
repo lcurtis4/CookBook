@@ -1,4 +1,4 @@
-import { getToken } from "../modules/authManager";
+import { getToken } from "./authManager";
 
 const apiUrl = "/api/dish"
 
@@ -44,5 +44,30 @@ export const getDishByUserId = () => {
                 Authorization: `Bearer ${token}`
             }
         }).then(res => res.json())
+    })
+}
+
+export const addDish = (dish) => {
+    return getToken().then((token) => {
+        return fetch(apiUrl, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(dish)
+        })
+    })
+}
+
+export const deleteDish = (id) => {
+    return getToken().then((token) => {
+        return fetch(`${apiUrl}/${id}`, {
+            method: "DELETE",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+        })
     })
 }
