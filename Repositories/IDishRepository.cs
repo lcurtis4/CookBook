@@ -10,5 +10,6 @@ namespace CookBook.Repositories
         Dish GetByDishId(int id);
         void Add(Dish dish);
         void Delete(int id);
+        void Update(Dish dish);
     }
 }

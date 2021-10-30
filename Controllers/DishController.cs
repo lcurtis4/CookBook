@@ -60,6 +60,22 @@ namespace CookBook.Controllers
             return NoContent();
         }
 
+        [HttpPut("{id:int}")]
+        public IActionResult Put(int id, Dish dish)
+        {
+            var currentUser = GetCurrentUserProfileId();
+            if (id != dish.Id)
+            {
+                return BadRequest();
+            }
+            dish.UserProfileId = currentUser.Id;
+            dish.CreateDateTime = DateTime.Now;
+            _dishRepository.Update(dish);
+            return NoContent();
+        }
+
+
+
         private UserProfile GetCurrentUserProfileId()
         {
             var firebaseUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);

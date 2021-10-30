@@ -113,5 +113,27 @@ namespace CookBook.Repositories
                 }
             }
         }
+
+        public void Update(Dish dish)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                                        UPDATE Dish
+                                        SET
+                                            Title = @Title,
+                                            Image = @Image
+                                         WHERE
+                                            Id = @Id";
+                    DbUtils.AddParameter(cmd, "@Title", dish.Title);
+                    DbUtils.AddParameter(cmd, "@Image", dish.Image);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }

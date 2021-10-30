@@ -71,3 +71,16 @@ export const deleteDish = (id) => {
         })
     })
 }
+
+export const editDish = (dish) => {
+    return getToken().then((token) => {
+        return fetch(apiUrl, {
+            method: "PUT",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(dish)
+        })
+    })
+}

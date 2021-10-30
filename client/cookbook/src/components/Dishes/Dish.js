@@ -12,6 +12,9 @@ export default function Dish({ dish, handleDelete }) {
                 <strong><Link to={`dish/${dish.id}`}>{dish.title}</Link></strong> 
                 <div className="font-weight-bold">{dish.title}</div>
                 <Button className="btn btn-danger float-right" onClick={() => handleDelete(dish.id)}>Delete</Button>
+                <Button className="btn btn-dark float-right" onClick={() => {
+                    history.push(`/dish/edit/${dish.id}`)
+                }}>Edit</Button>
             </CardBody>
         </Card>
     )

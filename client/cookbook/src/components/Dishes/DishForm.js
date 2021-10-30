@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router";
 import { Button, Form, FormGroup, Label, Input } from "reactstrap";
-import { addDish, getDishById } from "../Managers/dishManager";
+import { addDish, editDish, getDishById } from "../Managers/dishManager";
 
 export default function DishForm() {
     const history = useHistory();
@@ -28,6 +28,7 @@ export default function DishForm() {
         e.preventDefault()
         if (params.id) {
             setIsLoading(true)
+            editDish(dish)
             .then(()=>{
                 history.push("/dish")
             })
