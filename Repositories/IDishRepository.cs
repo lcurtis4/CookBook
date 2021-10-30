@@ -5,10 +5,10 @@ namespace CookBook.Repositories
 {
     public interface IDishRepository
     {
-        void Add(Dish dish);
         List<Dish> GetAll();
 
         Dish GetByDishId(int id);
-
+        void Add(Dish dish);
+        void Delete(int id);
     }
 }

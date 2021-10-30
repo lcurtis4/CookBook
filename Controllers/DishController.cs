@@ -15,7 +15,7 @@ namespace CookBook.Controllers
     [ApiController]
     public class DishController : ControllerBase
     {
-        private readonly IDishRepository _dishRepository;     
+        private readonly IDishRepository _dishRepository;
         private readonly IUserProfileRepository _userProfileRepository;
 
         public DishController(IDishRepository dishRepository, IUserProfileRepository userProfileRepository)
@@ -51,6 +51,13 @@ namespace CookBook.Controllers
             _dishRepository.Add(dish);
             return CreatedAtAction("Get", new { id = dish.Id }, dish);
 
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _dishRepository.Delete(id);
+            return NoContent();
         }
 
         private UserProfile GetCurrentUserProfileId()

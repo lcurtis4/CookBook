@@ -9,7 +9,8 @@ import {
   NavItem,
   NavLink
 } from 'reactstrap';
-import { logout } from '../modules/authManager';
+import { logout } from './Managers/authManager';
+
 
 export default function Header({ isLoggedIn }) {
   const [isOpen, setIsOpen] = useState(false);

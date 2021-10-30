@@ -3,7 +3,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { Spinner } from 'reactstrap';
 import ApplicationViews from "./components/ApplicationViews";
 import Header from "./components/Header";
-import { onLoginStatusChange } from "./modules/authManager";
+import { onLoginStatusChange } from './components/Managers/authManager';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(null);
