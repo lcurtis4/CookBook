@@ -29,6 +29,10 @@ export default function ApplicationViews({ isLoggedIn }) {
                 <Route path="/dish/:id" exact>
                     <DishDetail />
                 </Route>
+
+                <Route path="/dish/edit/:id" exact>
+                    <DishForm />
+                </Route>
             </Switch>
         </main>
     )

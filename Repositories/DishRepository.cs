@@ -66,11 +66,6 @@ namespace CookBook.Repositories
                             Title = DbUtils.GetString(reader, "Title"),
                             CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime"),
                             UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
-                            UserProfile = new UserProfile()
-                            {
-                                Id = DbUtils.GetInt(reader, "UserProfileId"),
-                                Name = DbUtils.GetString(reader, "Name")
-                            },
                         };
                     }
                     reader.Close();
@@ -109,6 +104,29 @@ namespace CookBook.Repositories
                 {
                     cmd.CommandText = "DELETE FROM Dish WHERE @Id = Id";
                     DbUtils.AddParameter(cmd, "@Id", id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void Update(Dish dish)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                                        UPDATE Dish
+                                        SET
+                                            Title = @Title,
+                                            Image = @Image
+                                         WHERE
+                                            Id = @Id";
+                    DbUtils.AddParameter(cmd, "@Title", dish.Title);
+                    DbUtils.AddParameter(cmd, "@Image", dish.Image);
+                    DbUtils.AddParameter(cmd, "@Id", dish.Id);
+
                     cmd.ExecuteNonQuery();
                 }
             }
