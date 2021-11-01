@@ -50,23 +50,37 @@ namespace CookBook.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT d.Id, d.Title, d.CreateDateTime, d.UserProfileId, u.[Name]
+                    cmd.CommandText = @"SELECT d.Id, d.Title, d.CreateDateTime, d.UserProfileId, u.[Name], s.Id StepId, s.stepText, s.stepOrder
                                    FROM Dish d
-                                         LEFT JOIN UserProfile u ON d.UserProfileId = u.id
-                                    WHERE d.id = @id";
+                                         LEFT JOIN Step s ON d.id = s.dishId
+                                    WHERE d.id = @id
+                                    ORDER BY s.stepOrder";
 
                     DbUtils.AddParameter(cmd, "@Id", id);
                     var reader = cmd.ExecuteReader();
                     Dish dish = null;
-                    if (reader.Read())
+                    while (reader.Read())
                     {
-                        dish = new Dish()
+                        if (dish == null)
                         {
-                            Id = DbUtils.GetInt(reader, "Id"),
-                            Title = DbUtils.GetString(reader, "Title"),
-                            CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime"),
-                            UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
-                        };
+                            dish = new Dish()
+                            {
+                                Id = DbUtils.GetInt(reader, "Id"),
+                                Title = DbUtils.GetString(reader, "Title"),
+                                CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime"),
+                                UserProfileId = DbUtils.GetInt(reader, "UserProfileId"),
+                                Steps = new List<Step>()
+                            };
+                        }
+                        if (!reader.IsDBNull(reader.GetOrdinal("StepId")))
+                        {
+                            dish.Steps.Add(new Step
+                            {
+                                Id = DbUtils.GetInt(reader, "StepId"),
+                                stepText = DbUtils.GetString(reader, "stepText"),
+                                stepOrder = DbUtils.GetInt(reader, "stepOrder")
+                            });
+                        }
                     }
                     reader.Close();
 

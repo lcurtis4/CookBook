@@ -24,6 +24,7 @@ namespace CookBook
         {
             services.AddTransient<IUserProfileRepository, UserProfileRepository>();
             services.AddTransient<IDishRepository, DishRepository>();
+            services.AddTransient<IStepRepository, StepRepository>();
 
             var firebaseProjectId = Configuration.GetValue<string>("FirebaseProjectId");
             var googleTokenUrl = $"https://securetoken.google.com/{firebaseProjectId}";

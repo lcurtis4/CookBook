@@ -43,7 +43,7 @@ namespace CookBook.Controllers
 
         [HttpPost]
         public IActionResult Add(Dish dish)
-        {
+             {
             var currentUser = GetCurrentUserProfileId();
 
             dish.UserProfileId = currentUser.Id;
