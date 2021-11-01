@@ -55,10 +55,8 @@ export default function DishForm() {
                     value={dish.title}
                     onChange={handleInputChange}
                 />
-                <Label for="imageLocation">Header Image</Label>
-                <Input type="text" name="imageLocation" id="imageLocation" placeholder="Image URL" value={dish.imageLocation} onChange={handleInputChange} />
-                <Label for="publishDateTime">Publication Date</Label>
-                <Input type="date" name="publishDateTime" id="publishDateTime" placeholder="Publication Date" valid={dish.publishDateTime} onChange={handleInputChange} />
+                {/* <Label for="imageLocation">Header Image</Label> */}
+                {/* <Input type="text" name="image" id="image" placeholder="Image URL" value={dish.image} onChange={handleInputChange} /> */}
             </FormGroup>
             <Button className="btn btn-primary" onClick={handleSave}>
                 Submit
