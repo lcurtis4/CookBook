@@ -60,7 +60,7 @@ namespace CookBook.Controllers
             return NoContent();
         }
 
-        [HttpPut("{id:int}")]
+        [HttpPut("{id}")]
         public IActionResult Put(int id, Dish dish)
         {
             var currentUser = GetCurrentUserProfileId();

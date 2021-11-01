@@ -5,7 +5,10 @@ import { addDish, editDish, getDishById } from "../Managers/dishManager";
 
 export default function DishForm() {
     const history = useHistory();
-    const [dish, setDish] = useState({})
+    const [dish, setDish] = useState({
+        title:"",
+        image: ""
+    })
     const [isLoading, setIsLoading] = useState(true)
     const params = useParams()
 

@@ -74,7 +74,7 @@ export const deleteDish = (id) => {
 
 export const editDish = (dish) => {
     return getToken().then((token) => {
-        return fetch(apiUrl, {
+        return fetch(`${apiUrl}/${dish.id}`, {
             method: "PUT",
             headers: {
                 Authorization: `Bearer ${token}`,
