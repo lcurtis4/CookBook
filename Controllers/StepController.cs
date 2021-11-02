@@ -16,7 +16,7 @@ namespace CookBook.Controllers
             _stepRepository = stepRepository;
             _dishRepository = dishRepository; 
         }
-        [HttpGet("{id")]
+        [HttpGet("{id}")]
         public IActionResult GetStepByDishId(int id)
         {
             var step = _stepRepository.GetStepByDishId(id);
@@ -25,6 +25,12 @@ namespace CookBook.Controllers
                 return NotFound();
             }
             return Ok(step);
+        }
+
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok(_stepRepository.GetAll(1026));
         }
     }
 }

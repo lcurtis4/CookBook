@@ -11,5 +11,6 @@ namespace CookBook.Models
         public int dishId { get; set; }
         public int stepOrder { get; set; }
         public string stepText { get; set; }
+        public Dish Dish { get; set; }
     }
 }

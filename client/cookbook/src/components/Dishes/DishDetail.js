@@ -1,12 +1,13 @@
 import { useEffect } from "react";
-import { useParams } from "react-router";
-import { ListGroup, ListGroupItem } from "reactstrap";
+import { useHistory, useParams } from "react-router";
+import { Button, ListGroup, ListGroupItem } from "reactstrap";
 import { useState } from "react/cjs/react.development";
 import { getDishById } from "../Managers/dishManager";
 
 export default function DishDetail () {
     const [dish, setDish] = useState({});
     const {id} = useParams();
+    const histroy = useHistory();
 
     useEffect(() => {
         getDishById(id).then(setDish);
@@ -20,6 +21,11 @@ export default function DishDetail () {
                         <h3>{dish.title}</h3>
                         <ListGroup>
                             <ListGroupItem>{dish.title}</ListGroupItem>
+                            <Button className="btn btn-dark fload-right" 
+                            //onClick={() => {
+                              // history.pushState(`/steps/${step.id}`)
+                            //</ListGroup>}}
+                            >Add Step</Button>
                         </ListGroup>
                     </ListGroup>
                 </div>

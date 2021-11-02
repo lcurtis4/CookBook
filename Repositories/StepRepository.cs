@@ -12,6 +12,43 @@ namespace CookBook.Repositories
     {
         public StepRepository(IConfiguration config) : base(config) { }
 
+        public List<Step> GetAll(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT s.stepText, s.stepOrder, s.dishId, d.id, d.Title
+                               FROM Step s
+                                       LEFT JOIN Dish d ON s.dishId = d.id
+                                WHERE s.dishId = @Id";
+
+                    DbUtils.AddParameter(cmd, "@Id", id);
+                    
+                    var reader = cmd.ExecuteReader();
+                    var step = new List<Step>();
+                    while (reader.Read())
+                    {
+                        step.Add(new Step()
+                        {
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            dishId = DbUtils.GetInt(reader, "dishId"),
+                            stepOrder = DbUtils.GetInt(reader, "stepOrder"),
+                            stepText = DbUtils.GetString(reader, "stepText"),
+                            Dish = new Dish()
+                            {
+                                Id = DbUtils.GetInt(reader, "Id"),
+                                Title = DbUtils.GetString(reader, "Title")
+                            }
+                        });
+                    }
+                    reader.Close();
+
+                    return step;
+                }
+            }
+        }
         public Step GetStepByDishId(int id)
         {
             using (var conn = Connection)

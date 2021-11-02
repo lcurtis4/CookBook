@@ -50,7 +50,7 @@ namespace CookBook.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT d.Id, d.Title, d.CreateDateTime, d.UserProfileId, u.[Name], s.Id StepId, s.stepText, s.stepOrder
+                    cmd.CommandText = @"SELECT d.Id, d.Title, d.CreateDateTime, d.UserProfileId, s.Id StepId, s.stepText, s.stepOrder
                                    FROM Dish d
                                          LEFT JOIN Step s ON d.id = s.dishId
                                     WHERE d.id = @id

@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace CookBook.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class DishController : ControllerBase
@@ -43,7 +42,7 @@ namespace CookBook.Controllers
 
         [HttpPost]
         public IActionResult Add(Dish dish)
-             {
+        {
             var currentUser = GetCurrentUserProfileId();
 
             dish.UserProfileId = currentUser.Id;
