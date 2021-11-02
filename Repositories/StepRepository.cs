@@ -84,5 +84,27 @@ namespace CookBook.Repositories
 
             }
         }
+
+        public void Add(Step step)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"INSERT INTO Step (dishId, stepText, stepOrder)
+                                        OUTPUT INSERTED.ID
+                                        VALUES (@dishId, @stepText, @stepOrder)";
+                    DbUtils.AddParameter(cmd, "@dishId", step.dishId);
+                    DbUtils.AddParameter(cmd, "@stepText", step.stepText);
+                    DbUtils.AddParameter(cmd, "@stepOrder", step.stepOrder);
+
+                    int id = (int)cmd.ExecuteScalar();
+                    step.Id = id; 
+                }
+            }
+        }
+
+
     }
 }
