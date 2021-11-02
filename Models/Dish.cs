@@ -13,6 +13,7 @@ namespace CookBook.Models
         [Required]
         public string Title { get; set; }
         public string Image { get; set; }
+        public List<Step> Steps { get; set; }
         
         [Required]
         public DateTime CreateDateTime { get; set; }

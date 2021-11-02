@@ -35,7 +35,6 @@ export default function DishList() {
         <section>
             {dishes.map((d) => 
                 <Dish key={d.id} dish={d} handleDelete={handleDelete} />
-                //add delete method
             )}
         </section>
     )

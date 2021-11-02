@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace CookBook.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class DishController : ControllerBase
