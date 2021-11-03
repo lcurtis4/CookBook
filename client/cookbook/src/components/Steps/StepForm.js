@@ -35,7 +35,7 @@ export default function StepForm() {
                 <input 
                     type="text"
                     id="stepText"
-                    placeholder="stepText"
+                    placeholder="Input instructions here"
                     value={step.stepText}
                     onChange={handleInputChange}
                 />
