@@ -1,22 +1,17 @@
 import { useEffect } from "react";
 import { useHistory, useParams } from "react-router";
 import { useState } from "react/cjs/react.development";
-import { Form, FormGroup, Label } from "reactstrap";
-import { getStepById } from "../Managers/stepManager";
+import { Button, Form, FormGroup, Label } from "reactstrap";
+import { addStep, getStepById } from "../Managers/stepManager";
 
 export default function StepForm() {
     const history = useHistory();
     const [step, setStep] = useState({})
-    cosnt [isLoading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(true)
     const params = useParams()
 
     useEffect(() => {
-        if (params.id) {
-            getStepById(params.id).then(p => {
-                setStep(p)
-                setIsLoading(false)
-            })
-        }
+        setStep({... step, dishId: params.dishId})
     }, [])
 
     const handleInputChange = e => {
@@ -25,18 +20,37 @@ export default function StepForm() {
         setStep(stepCopy)
     }
 
+    const handleSave = e => {
+        e.preventDefault()
+        addStep(step)
+            .then(() => {
+                history.push(`/dish/${params.dishId}`)
+            })
+    }
+
     return (
         <Form>
             <FormGroup>
                 <Label for="stepText"></Label>
-                <Input 
+                <input 
                     type="text"
                     id="stepText"
                     placeholder="stepText"
                     value={step.stepText}
                     onChange={handleInputChange}
                 />
+                <input 
+                    type="number"
+                    id="stepOrder"
+                    placeholder="Which step is this?"
+                    value={step.stepOrder}
+                    onChange={handleInputChange}
+                />
+                <Button className="btn btn-primary" onClick={handleSave}>
+                    Submit
+                </Button>
             </FormGroup> 
         </Form>
+
     )
 }

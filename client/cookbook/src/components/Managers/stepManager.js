@@ -1,6 +1,6 @@
 import { getToken } from "../Managers/authManager"
 
-const apiUrl = "api/step"
+const apiUrl = "/api/step"
 
 export const getAllSteps = () => {
     return getToken().then((token) => {
@@ -26,12 +26,19 @@ export const getStepById = (id) => {
             headers: {
                 Authorization: `Bearer ${token}`
             }
-        }).then(res => {
-            if (res.ok) {
-                return res.json()
-            } else {
-                throw new Error("ERROR GETTTING STEP BY ID")
-            }
+        })
+    })
+}
+
+export const addStep = (step) => {
+    return getToken().then((token) => {
+        return fetch(apiUrl, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(step)
         })
     })
 }

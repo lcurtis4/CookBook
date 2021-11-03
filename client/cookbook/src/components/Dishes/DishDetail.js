@@ -7,7 +7,7 @@ import { getDishById } from "../Managers/dishManager";
 export default function DishDetail () {
     const [dish, setDish] = useState({});
     const {id} = useParams();
-    const histroy = useHistory();
+    const history = useHistory();
 
     useEffect(() => {
         getDishById(id).then(setDish);
@@ -22,10 +22,9 @@ export default function DishDetail () {
                         <ListGroup>
                             <ListGroupItem>{dish.title}</ListGroupItem>
                             <Button className="btn btn-dark fload-right" 
-                            //onClick={() => {
-                              // history.pushState(`/steps/${step.id}`)
-                            //</ListGroup>}}
-                            >Add Step</Button>
+                            onClick={() => {
+                                history.push(`/addStep/${id}`)
+                            }}>Add Step</Button>
                         </ListGroup>
                     </ListGroup>
                 </div>

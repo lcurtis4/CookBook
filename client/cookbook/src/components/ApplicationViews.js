@@ -6,6 +6,7 @@ import Login from "./Login"
 import Register from "./Register"
 import DishForm from "./Dishes/DishForm"
 import StepList from "./Steps/StepList"
+import StepForm from "./Steps/StepForm"
 
 export default function ApplicationViews({ isLoggedIn }) {
     return (
@@ -34,6 +35,10 @@ export default function ApplicationViews({ isLoggedIn }) {
 
                 <Route path="/dish/edit/:id" exact>
                     <DishForm />
+                </Route>
+
+                <Route path="/addStep/:dishId" exact>
+                    <StepForm />
                 </Route>
             </Switch>
         </main>
