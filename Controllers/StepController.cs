@@ -43,11 +43,10 @@ namespace CookBook.Controllers
         [HttpPost]
         public IActionResult Add(Step step, int id)
         {
-            var dish = _dishRepository.GetByDishId(id);
-            step.dishId = dish.Id; 
-
             _stepRepository.Add(step);
             return CreatedAtAction("Get", new { id = step.Id }, step);
         }
+
+
     }
 }

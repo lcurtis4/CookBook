@@ -37,7 +37,7 @@ export default function ApplicationViews({ isLoggedIn }) {
                     <DishForm />
                 </Route>
 
-                <Route path="/addStep" exact>
+                <Route path="/addStep/:dishId" exact>
                     <StepForm />
                 </Route>
             </Switch>

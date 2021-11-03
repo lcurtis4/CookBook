@@ -11,12 +11,7 @@ export default function StepForm() {
     const params = useParams()
 
     useEffect(() => {
-        if (params.id) {
-            getStepById(params.id).then(p => {
-                setStep(p)
-                setIsLoading(false)
-            })
-        }
+        setStep({... step, dishId: params.dishId})
     }, [])
 
     const handleInputChange = e => {
@@ -27,17 +22,10 @@ export default function StepForm() {
 
     const handleSave = e => {
         e.preventDefault()
-        if (params.id) {
-            setIsLoading(true)
+        addStep(step)
             .then(() => {
-                history.push("/dish/:id")
+                history.push(`/dish/${params.dishId}`)
             })
-        } else {
-            addStep(step)
-                .then(() => {
-                    history.go(-1)
-                })
-        }
     }
 
     return (
@@ -63,5 +51,6 @@ export default function StepForm() {
                 </Button>
             </FormGroup> 
         </Form>
+
     )
 }

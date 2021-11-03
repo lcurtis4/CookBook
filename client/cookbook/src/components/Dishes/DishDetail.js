@@ -23,7 +23,7 @@ export default function DishDetail () {
                             <ListGroupItem>{dish.title}</ListGroupItem>
                             <Button className="btn btn-dark fload-right" 
                             onClick={() => {
-                                history.push(`/addStep`)
+                                history.push(`/addStep/${id}`)
                             }}>Add Step</Button>
                         </ListGroup>
                     </ListGroup>
