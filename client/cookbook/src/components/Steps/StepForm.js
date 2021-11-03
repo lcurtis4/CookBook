@@ -35,7 +35,7 @@ export default function StepForm() {
         } else {
             addStep(step)
                 .then(() => {
-                    history.push("/dish/:id")
+                    history.go(-1)
                 })
         }
     }

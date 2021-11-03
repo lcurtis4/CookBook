@@ -95,9 +95,9 @@ namespace CookBook.Repositories
                     cmd.CommandText = @"INSERT INTO Step (dishId, stepText, stepOrder)
                                         OUTPUT INSERTED.ID
                                         VALUES (@dishId, @stepText, @stepOrder)";
-                    DbUtils.AddParameter(cmd, "@dishId", step.dishId);
                     DbUtils.AddParameter(cmd, "@stepText", step.stepText);
                     DbUtils.AddParameter(cmd, "@stepOrder", step.stepOrder);
+                    DbUtils.AddParameter(cmd, "@dishId", step.dishId);
 
                     int id = (int)cmd.ExecuteScalar();
                     step.Id = id; 
