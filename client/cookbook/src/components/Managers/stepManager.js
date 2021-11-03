@@ -35,3 +35,16 @@ export const getStepById = (id) => {
         })
     })
 }
+
+export const addStep = (step) => {
+    return getToken().then((token) => {
+        return fetch(apiUrl, {
+            method: "POST",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(step)
+        })
+    })
+}
