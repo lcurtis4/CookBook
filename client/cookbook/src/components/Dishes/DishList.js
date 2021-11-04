@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useHistory } from "react-router";
 import { useState } from "react/cjs/react.development";
+import { Button } from "reactstrap";
 import { deleteDish, getAllDishes } from "../Managers/dishManager";
 import Dish from "./Dish"
 
@@ -33,6 +34,7 @@ export default function DishList() {
 
     return (
         <section>
+            <Button className="btn btn-dark float-right" onClick={() => history.push("/addDish")}>New Dish</Button>
             {dishes.map((d) => 
                 <Dish key={d.id} dish={d} handleDelete={handleDelete} />
             )}
