@@ -25,10 +25,10 @@ export default function DishDetail ({handleDelete}) {
                             onClick={() => {
                                 history.push(`/addStep/${id}`)
                             }}>Add Step</Button>
-                            <Button className="btn btn-danger float-right" onClick={() => handleDelete(dish.id)}>Delete</Button>
+                            {/* <Button className="btn btn-danger float-right" onClick={() => handleDelete(dish.id) }>Delete</Button>
                             <Button className="btn btn-dark float-right" onClick={() => {
                                 history.push(`/dish/edit/${dish.id}`)
-                            }}>Edit</Button>
+                            }}>Edit</Button> */}
                         </ListGroup>
                     </ListGroup>
                 </div>

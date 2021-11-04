@@ -37,6 +37,7 @@ export default function StepForm() {
                     id="stepText"
                     placeholder="Input instructions here"
                     value={step.stepText}
+                    autoComplete="off"
                     onChange={handleInputChange}
                 />
                 <input 
@@ -44,6 +45,7 @@ export default function StepForm() {
                     id="stepOrder"
                     placeholder="Which step is this?"
                     value={step.stepOrder}
+                    autoComplete="off"
                     onChange={handleInputChange}
                 />
                 <Button className="btn btn-primary" onClick={handleSave}>

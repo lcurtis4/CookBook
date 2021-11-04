@@ -53,6 +53,7 @@ export default function DishForm() {
                     id="title"
                     placeholder="title"
                     value={dish.title}
+                    autoComplete="off"
                     onChange={handleInputChange}
                 />
                 {/* <Label for="imageLocation">Header Image</Label> */}
